@@ -1,0 +1,26 @@
+import barrio.* 
+import elementos.*
+
+describe "Plagas" {
+	const hogarLimpio = new Hogar(nivelMugre = 20, confort = 50)
+	const hogarSucio = new Hogar(nivelMugre = 50, confort = 50)
+	const huerta = new Huerta(capacidadProduccion = 1000)
+	const morris = new Barrio(elementos = [hogarLimpio, hogarSucio, huerta])
+	
+	fixture {	
+		INTA.produccionMinima(900)
+	}
+	
+	test "hogar" {
+		assert.that(hogarLimpio.esBueno())
+		assert.notThat(hogarSucio.esBueno())
+	}	
+	
+	test "huerta" {
+		assert.that(huerta.esBueno())
+	}
+	
+	test "barrio" {
+		assert.that(morris.esCopado())
+	}
+}
